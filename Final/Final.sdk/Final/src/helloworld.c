@@ -44,7 +44,7 @@
  *   uartlite    Configurable only in HW design
  *   ps7_uart    115200 (configured by bootrom/bsp)
  *
- * Á¤º¸Åë½Å°øÇĞ°ú 14010843 ±è¹Î¼º
+ * ì •ë³´í†µì‹ ê³µí•™ê³¼ 14010843 ê¹€ë¯¼ì„±
  *
  */
 
@@ -73,16 +73,16 @@ XScuGic INTCInst;
 static int push_sw_data;
 static int mode;			// 0: select file, 1: readfile, find hash, 2: save hash
 static int button;			// 1, 2, 3, 4
-u32 hash_data;				// 32bit Hash
+u32 hash_data;			// 32bit Hash
 int fileIdx;				// File Index
-int addressIdx;				// Memory Address °£°İ
+int addressIdx;			// Memory Address ê°„ê²©
 
 // file variation
-FIL fil;					// File object structure (FIL)
+FIL fil;				// File object structure (FIL)
 FILINFO fno[257];			// File status structure (FILINFO)
 FRESULT res;				// File function return code (FRESULT)
-DIR dir;					// Directory object structure (DIR)
-FATFS fs32;					// File system object structure (FATFS)
+DIR dir;				// Directory object structure (DIR)
+FATFS fs32;				// File system object structure (FATFS)
 char dataBuffer[4];			// 4Byte Buffer
 
 //function list
@@ -107,9 +107,9 @@ int main() {
 	xil_printf("Hello\n\r");	// hello?
 
 	int status;
-	u32 IV = INITIAL_VALUE;		// ÇØ½¬ ÃÊ±â Seed °ª
-	TCHAR *Path="0:/";			// SD ÃÖ»ó´Ü Æú´õ
-	char* fileName;				// ÆÄÀÏ ÀÌ¸§
+	u32 IV = INITIAL_VALUE;		// í•´ì‰¬ ì´ˆê¸° Seed ê°’
+	TCHAR *Path="0:/";		// SD ìµœìƒë‹¨ í´ë”
+	char* fileName;			// íŒŒì¼ ì´ë¦„
 
 	// Initialize LCD
 	status =XGpio_Initialize(&LCD_Inst, XPAR_LCD_DEVICE_ID);
@@ -150,12 +150,12 @@ int main() {
 
 	XGpio_SetDataDirection(&PUSH_SWInst, 1, 0xFF); 		// Set all buttons direction to inputs
 
-	XGpio_SetDataDirection(&Hash_data,1,0x00); 			// data_in
-	XGpio_SetDataDirection(&Hash_data,2,0xff); 			// data_out
-	XGpio_SetDataDirection(&Hash_ctrl,1,0x00); 			// reset
-	XGpio_SetDataDirection(&Hash_ctrl,2,0x00); 			// Seed
+	XGpio_SetDataDirection(&Hash_data,1,0x00); 		// data_in
+	XGpio_SetDataDirection(&Hash_data,2,0xff); 		// data_out
+	XGpio_SetDataDirection(&Hash_ctrl,1,0x00); 		// reset
+	XGpio_SetDataDirection(&Hash_ctrl,2,0x00); 		// Seed
 
-	XGpio_SetDataDirection(&LEDInst,1,0xff);			// Set LED direction
+	XGpio_SetDataDirection(&LEDInst,1,0xff);		// Set LED direction
 
 	// Initialize interrupt controller
 	status = IntcInitFunction(XPAR_PS7_SCUGIC_0_DEVICE_ID, &PUSH_SWInst);
@@ -164,113 +164,113 @@ int main() {
 		return XST_FAILURE;
 	}
 
-	char* buf=""; 										// Ã¹¹øÂ° ÇØ½¬ Ãâ·ÂÀº ¹ö·Á¾ß ÇÔ
+	char* buf=""; 							// ì²«ë²ˆì§¸ í•´ì‰¬ ì¶œë ¥ì€ ë²„ë ¤ì•¼ í•¨
 	hash_write(buf,IV);
 
 	/////////////////////////////////////////////////////////////////////
 
-	fileIdx=0;											// fileIndex initialize
+	fileIdx=0;							// fileIndex initialize
 	init_LCD();
 
 	xil_printf("Hashing Program\n\r");
 	display_string("Hashing Program");
 
-	for(int i=1;i<=8;i++) {								// 2sec hold, Loading
-		XGpio_DiscreteWrite(&LEDInst,1,(1<<i));			// LED 1¹øºÎÅÍ 8¹ø±îÁö 250ms °£°İÀ¸·Î ¼øÂ÷ Á¡µî
+	for(int i=1;i<=8;i++) {						// 2sec hold, Loading
+		XGpio_DiscreteWrite(&LEDInst,1,(1<<i));			// LED 1ë²ˆë¶€í„° 8ë²ˆê¹Œì§€ 250ms ê°„ê²©ìœ¼ë¡œ ìˆœì°¨ ì ë“±
 		usleep(250000);
 	}
-	XGpio_DiscreteWrite(&LEDInst,1,0);					// LED ¼Òµî
+	XGpio_DiscreteWrite(&LEDInst,1,0);				// LED ì†Œë“±
 
-	addressIdx=-32;										// addr initialize, Ã³À½ ÀúÀåÇÏ´Â Àå¼Ò¸¦ BASEADDR·Î ÇÏ±â À§ÇÔ
-	int idx=1; 											// file idx, 0: Root "0:/"
-	int is_mount=0, pMount=0;							// ÇöÀç ¸¶¿îÆ® Á¤º¸, ÀÌÀü ¸¶¿îÆ® Á¤º¸
-	mode=0;												// state
+	addressIdx=-32;							// addr initialize, ì²˜ìŒ ì €ì¥í•˜ëŠ” ì¥ì†Œë¥¼ BASEADDRë¡œ í•˜ê¸° ìœ„í•¨
+	int idx=1; 							// file idx, 0: Root "0:/"
+	int is_mount=0, pMount=0;					// í˜„ì¬ ë§ˆìš´íŠ¸ ì •ë³´, ì´ì „ ë§ˆìš´íŠ¸ ì •ë³´
+	mode=0;								// state
 
 	while(1) {
-		res=f_mount(&fs32,Path,1);						// SD ¸¶¿îÆ® ½Ãµµ
+		res=f_mount(&fs32,Path,1);				// SD ë§ˆìš´íŠ¸ ì‹œë„
 
-		if(res!=FR_OK) {								// Unmounted
-			XGpio_DiscreteWrite(&LEDInst,1,0x80);		// 8¹ø LED Á¡µî
+		if(res!=FR_OK) {					// Unmounted
+			XGpio_DiscreteWrite(&LEDInst,1,0x80);		// 8ë²ˆ LED ì ë“±
 			xil_printf("Unmounted\n\r");
 			display_string("Unmounted");
 			is_mount=0;
 			mode=0;
 			continue;
 		}
-		else {											// Mounted
+		else {							// Mounted
 			is_mount=1;
-			fileIdx=0;									// fileIdx ÃÊ±âÈ­ (ÆÄÀÏ ¸ñ·ÏÀÌ ¹Ù²ğ ¼ö ÀÖ±â ¶§¹®)
-			f_opendir_scan(Path);						// SD Æú´õ ½ºÄµ
-			XGpio_DiscreteWrite(&LEDInst,1,0x40);		// 7¹ø LED Á¡µî
+			fileIdx=0;					// fileIdx ì´ˆê¸°í™” (íŒŒì¼ ëª©ë¡ì´ ë°”ë€” ìˆ˜ ìˆê¸° ë•Œë¬¸)
+			f_opendir_scan(Path);				// SD í´ë” ìŠ¤ìº”
+			XGpio_DiscreteWrite(&LEDInst,1,0x40);		// 7ë²ˆ LED ì ë“±
 		}
 
-		if(is_mount!=pMount) {							// ÀÌÀü ¸¶¿îÆ® Á¤º¸¿Í ÇöÀç ¸¶¿îÆ® Á¤º¸°¡ ´Ù¸£¸é SD ÀÔ·ÂÀÌ ´Ş¶óÁ³À½À» ÀÇ¹Ì
-			if(is_mount==1 && pMount==0) updateHash();	// ÆÄÀÏ ¸ñ·ÏÀÌ º¯°æ‰çÀ» ¶§ ÆÄÀÏ ÀÎµ¦½º Á¤º¸µµ º¯°æµÇ¹Ç·Î ¸Ş¸ğ¸® Á¤º¸¸¦ º¯°æ
-			pMount=is_mount;							// ÀÌÀü ¸¶¿îÆ® Á¤º¸ ¾÷µ¥ÀÌÆ®
+		if(is_mount!=pMount) {					// ì´ì „ ë§ˆìš´íŠ¸ ì •ë³´ì™€ í˜„ì¬ ë§ˆìš´íŠ¸ ì •ë³´ê°€ ë‹¤ë¥´ë©´ SD ì…ë ¥ì´ ë‹¬ë¼ì¡ŒìŒì„ ì˜ë¯¸
+			if(is_mount==1 && pMount==0) updateHash();	// íŒŒì¼ ëª©ë¡ì´ ë³€ê²½ë˜ì—ˆë‹¤ë©´ íŒŒì¼ ì¸ë±ìŠ¤ ì •ë³´ë„ ë³€ê²½ë˜ë¯€ë¡œ ë©”ëª¨ë¦¬ ì •ë³´ë¥¼ ë³€ê²½
+			pMount=is_mount;				// ì´ì „ ë§ˆìš´íŠ¸ ì •ë³´ ì—…ë°ì´íŠ¸
 		}
 
 		if(is_mount && mode==0) {
-			XGpio_DiscreteWrite(&LEDInst,1,0x41);		// LED 1¹ø, 7¹ø Á¡µî
-			if(button==1) { 							// up index
+			XGpio_DiscreteWrite(&LEDInst,1,0x41);		// LED 1ë²ˆ, 7ë²ˆ ì ë“±
+			if(button==1) { 				// up index
 				idx++;
 				if(idx>fileIdx) idx=1;
-				button=0;								// ¹öÆ° ÀÔ·ÂÀÌ À¯ÁöµÇÁö ¾Êµµ·Ï ÃÊ±âÈ­
+				button=0;				// ë²„íŠ¼ ì…ë ¥ì´ ìœ ì§€ë˜ì§€ ì•Šë„ë¡ ì´ˆê¸°í™”
 			}
-			else if(button==2) { 						// down index
+			else if(button==2) { 				// down index
 				idx--;
 				if(idx<1) idx=fileIdx;
-				button=0;								// ¹öÆ° ÀÔ·ÂÀÌ À¯ÁöµÇÁö ¾Êµµ·Ï ÃÊ±âÈ­
+				button=0;				// ë²„íŠ¼ ì…ë ¥ì´ ìœ ì§€ë˜ì§€ ì•Šë„ë¡ ì´ˆê¸°í™”
 			}
 			else if(button==3) mode=1, button=0;
 
-			fileName=fno[idx].fname;					// FILINFO ±¸Á¶Ã¼ÀÇ fnameÀ» ÀúÀå
-			display_string(fileName);					// LCD·Î Ãâ·Â
-			xil_printf("\r                        \r"); // ½Ã¸®¾ó ¹öÆÛÁ¦°Å
-			xil_printf("\rFileName : %s\r",fileName);	// ½Ã¸®¾ó·Î Ãâ·Â
+			fileName=fno[idx].fname;			// FILINFO êµ¬ì¡°ì²´ì˜ fnameì„ ì €ì¥
+			display_string(fileName);			// LCDë¡œ ì¶œë ¥
+			xil_printf("\r                        \r");	// ì‹œë¦¬ì–¼ ë²„í¼ì œê±°
+			xil_printf("\rFileName : %s\r",fileName);	// ì‹œë¦¬ì–¼ë¡œ ì¶œë ¥
 		}
 
 		else if(is_mount && mode==1) {
-			XGpio_DiscreteWrite(&LEDInst,1,0x42);		// LED 2¹ø, 7¹ø Á¡µî
+			XGpio_DiscreteWrite(&LEDInst,1,0x42);		// LED 2ë²ˆ, 7ë²ˆ ì ë“±
 			xil_printf("\n");
-			fileRead(idx, Path); 						// Select this file and calculate hash
+			fileRead(idx, Path); 				// Select this file and calculate hash
 
-			if(find_hash(idx)) { 						// same hash in memory, this file is original
+			if(find_hash(idx)) { 				// same hash in memory, this file is original
 				xil_printf("Original file\n\n\r");
 
 				display_string("Origianl FIL");
-				sleep(2); 								// 2sec hold
+				sleep(2); 				// 2sec hold
 
 				mode=0;
 			}
-			else { 										// ¸Ş¸ğ¸®¿¡ ¾ø°Å³ª ¿øº»ÀÌ ¾Æ´Ô
+			else { 						// ë©”ëª¨ë¦¬ì— ì—†ê±°ë‚˜ ì›ë³¸ì´ ì•„ë‹˜
 				xil_printf("Not original file\n\r");
 
 				display_string("Not original FIL");
 				sleep(2); 								// 1sec hold
 
-				mode=2;									// ´ÙÀ½ ¸ğµå·Î º¯°æ
+				mode=2;									// ë‹¤ìŒ ëª¨ë“œë¡œ ë³€ê²½
 			}
 			xil_printf("\n");
 		}
 
 		else if(is_mount && mode==2) {
-			XGpio_DiscreteWrite(&LEDInst,1,0x44);		// LED 3¹ø, 7¹ø Á¡µî
+			XGpio_DiscreteWrite(&LEDInst,1,0x44);		// LED 3ë²ˆ, 7ë²ˆ ì ë“±
 
 			xil_printf("Save the file?\r");
 			display_string("Save the file?");
 
-			if(button==1) {								// fileIdx °ª¿¡ µû¶ó ÀúÀåµÇ´Â À§Ä¡°¡ ´Ş¶óÁü
-				addressIdx=32*(idx-1);					// BASEADDR¿¡ addressIdx °ªÀ» ´õÇØ ÀúÀåÇÏ±â ¶§¹®¿¡ 32bit¾¿ °Ç³Ê¶ç¾î ÀúÀå
+			if(button==1) {									// fileIdx ê°’ì— ë”°ë¼ ì €ì¥ë˜ëŠ” ìœ„ì¹˜ê°€ ë‹¬ë¼ì§
+				addressIdx=32*(idx-1);							// BASEADDRì— addressIdx ê°’ì„ ë”í•´ ì €ì¥í•˜ê¸° ë•Œë¬¸ì— 32bitì”© ê±´ë„ˆë„ì–´ ì €ì¥
 				xil_printf("\nYes\n\r");
 				Xil_Out32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+addressIdx,hash_data);
 				xil_printf("addr=%d, Hash saved\n\n\r",addressIdx);
-				button=0;								// ¹öÆ° ÀÔ·ÂÀÌ À¯ÁöµÇÁö ¾Êµµ·Ï ÃÊ±âÈ­
-				mode=0;									// ÀúÀå ¿Ï·á ÈÄ ¸ğµå º¯°æ (->0)
+				button=0;								// ë²„íŠ¼ ì…ë ¥ì´ ìœ ì§€ë˜ì§€ ì•Šë„ë¡ ì´ˆê¸°í™”
+				mode=0;									// ì €ì¥ ì™„ë£Œ í›„ ëª¨ë“œ ë³€ê²½ (->0)
 			}
 			else if(button==2){
 				xil_printf("\nNo\n\n\r");
-				button=0;								// ¹öÆ° ÀÔ·ÂÀÌ À¯ÁöµÇÁö ¾Êµµ·Ï ÃÊ±âÈ­
-				mode=0;									// ÀúÀå ¿Ï·á ÈÄ ¸ğµå º¯°æ (->0)
+				button=0;								// ë²„íŠ¼ ì…ë ¥ì´ ìœ ì§€ë˜ì§€ ì•Šë„ë¡ ì´ˆê¸°í™”
+				mode=0;									// ì €ì¥ ì™„ë£Œ í›„ ëª¨ë“œ ë³€ê²½ (->0)
 			}
 		}
 	}
@@ -299,7 +299,7 @@ void BTN_Intr_Handler(void *InstancePtr) {
 	XGpio_InterruptEnable(&PUSH_SWInst, BTN_INT);
 }
 
-//ÀÎÅÍ·´Æ® ½Ã½ºÅÛ
+//ì¸í„°ëŸ½íŠ¸ ì‹œìŠ¤í…œ
 int InterruptSystemSetup(XScuGic *XScuGicInstancePtr) {
 	// Enable interrupt
 	XGpio_InterruptEnable(&PUSH_SWInst, BTN_INT);
@@ -376,7 +376,7 @@ void init_LCD() {
 	usleep(4000);
 }
 
-//Æ¯Á¤ ¹®ÀÚ¸¦ LCD·Î Ãâ·ÂÇÏ±âÀ§ÇÑ ÇÔ¼ö
+//íŠ¹ì • ë¬¸ìë¥¼ LCDë¡œ ì¶œë ¥í•˜ê¸°ìœ„í•œ í•¨ìˆ˜
 void display_LCD(int alpha) {
     XGpio_DiscreteWrite(&LCD_Inst, 1, alpha+1024);
 	usleep(6000);
@@ -396,66 +396,66 @@ void clear_LCD() {
 	usleep(4000);
 }
 
-void f_opendir_scan(char *Path) {											// open directory & scan
+void f_opendir_scan(char *Path) {								// open directory & scan
     TCHAR path[200] = "";
-    res = f_mount(&fs32,Path,1);											// Mount a logical drive
+    res = f_mount(&fs32,Path,1);								// Mount a logical drive
 //  printf("SD Mount : res f_mount : %02X\n\r",res);
 
     if (res == FR_OK)
     {
-    	res = f_opendir(&dir,path);											// Open a directory
+    	res = f_opendir(&dir,path);								// Open a directory
 //      printf("res f_open : %02X\n\r",res);
         if (res == FR_OK)
         {
         	while(1)
         	{
-				res = f_readdir(&dir, &fno[fileIdx]);						// Read a directory item
+				res = f_readdir(&dir, &fno[fileIdx]);				// Read a directory item
 
 				if(res!=FR_OK) display_string("Empty folder");
 
-				if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break;	// readdir ¸®ÅÏ°ªÀÌ FR_OK°¡ ¾Æ´Ï°Å³ª ÆÄÀÏ ÀÌ¸§ÀÌ ¾øÀ¸¸é Á¾·á
+				if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break;	// readdir ë¦¬í„´ê°’ì´ FR_OKê°€ ì•„ë‹ˆê±°ë‚˜ íŒŒì¼ ì´ë¦„ì´ ì—†ìœ¼ë©´ ì¢…ë£Œ
 				else fileIdx++;
 
 			}
 
 		}
-        res=f_closedir(&dir);												// Close an open directory
+        res=f_closedir(&dir);									// Close an open directory
     }
     else return;
 
-    res = f_mount(0,Path,0); 												// Unmount
-    fileIdx-=1;																// ¸¶Áö¸· ·çÇÁ¿¡¼­ ÇÏ³ª ´õ Ä«¿îÆ® µÇ¹Ç·Î ÇÏ³ª »©ÁØ´Ù
+    res = f_mount(0,Path,0); 									// Unmount
+    fileIdx-=1;											// ë§ˆì§€ë§‰ ë£¨í”„ì—ì„œ í•˜ë‚˜ ë” ì¹´ìš´íŠ¸ ë˜ë¯€ë¡œ í•˜ë‚˜ ë¹¼ì¤€ë‹¤
 }
 
-void fileRead(int idx, char* path) { 										// read file
-	UINT br;																// Pointer to the UINT variable that receives number of bytes read
-	char *fn;																// file name
+void fileRead(int idx, char* path) { 								// read file
+	UINT br;										// Pointer to the UINT variable that receives number of bytes read
+	char *fn;										// file name
 
-	res = f_mount(&fs32,path,1);											// Mount a logical drive
+	res = f_mount(&fs32,path,1);								// Mount a logical drive
 	if(res!=FR_OK) {
 		xil_printf("failed mount\n\r");
 		return;
 	}
 
 	fn=fno[idx].fname;
-	if(fn==0) return;														// ÆÄÀÏ ÀÌ¸§ÀÌ ¾øÀ¸¸é Á¾·á
+	if(fn==0) return;									// íŒŒì¼ ì´ë¦„ì´ ì—†ìœ¼ë©´ ì¢…ë£Œ
 
-	res=f_open(&fil,fn,FA_READ);											// Open a file
+	res=f_open(&fil,fn,FA_READ);								// Open a file
 
 	if(res==FR_OK) {
 		int cnt=0;
 		DWORD fsk_offset=0;
 
 		for(int i=0;i<fil.fsize;i+=4) {
-			memset(dataBuffer,0,sizeof(dataBuffer));						// initialize buffer
+			memset(dataBuffer,0,sizeof(dataBuffer));				// initialize buffer
 
-			res=f_lseek(&fil,fsk_offset);									// Move file pointer of a file object
-			res=f_read(&fil,(void*)dataBuffer,4,&br);						// Read data from a file
+			res=f_lseek(&fil,fsk_offset);						// Move file pointer of a file object
+			res=f_read(&fil,(void*)dataBuffer,4,&br);				// Read data from a file
 
-			if(cnt==0) hash_write(dataBuffer,(u32)INITIAL_VALUE);			// Ã³À½ ÇØ½¬´Â ½Ãµå·Î ÃÊ±â°ª ³Ö°í °è»ê
-			else hash_write(dataBuffer,hash_data);							// µÎ¹øÂ° ÀÌ»ó ÇØ½¬´Â ½Ãµå·Î ÀÌÀü ÇØ½¬¸¦ ³Ö°í °è»ê
+			if(cnt==0) hash_write(dataBuffer,(u32)INITIAL_VALUE);			// ì²˜ìŒ í•´ì‰¬ëŠ” ì‹œë“œë¡œ ì´ˆê¸°ê°’ ë„£ê³  ê³„ì‚°
+			else hash_write(dataBuffer,hash_data);					// ë‘ë²ˆì§¸ ì´ìƒ í•´ì‰¬ëŠ” ì‹œë“œë¡œ ì´ì „ í•´ì‰¬ë¥¼ ë„£ê³  ê³„ì‚°
 
-			fsk_offset+=4;													// ¿ÀÇÁ¼Â 4¹ÙÀÌÆ® µÚ·Î ÀÌµ¿
+			fsk_offset+=4;								// ì˜¤í”„ì…‹ 4ë°”ì´íŠ¸ ë’¤ë¡œ ì´ë™
 			cnt++;
 		}
 	}
@@ -465,42 +465,42 @@ void fileRead(int idx, char* path) { 										// read file
 		return;
 	}
 
-	res=f_close(&fil); 														// file close
-	res = f_mount(&fs32,path,0); 											// Unmount a logical drive
+	res=f_close(&fil); 									// file close
+	res = f_mount(&fs32,path,0); 								// Unmount a logical drive
 }
 
-u32 string2hex(char* msg) { 												// 4Bytes String to hex
+u32 string2hex(char* msg) { 									// 4Bytes String to hex
 	u32 res=0;
-	res += ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]);			// msg ¿ø¼Ò¸¦ ½ÃÇÁÆ®½ÃÄÑ 32bit·Î »ı¼º
+	res += ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]);				// msg ì›ì†Œë¥¼ ì‹œí”„íŠ¸ì‹œì¼œ 32bitë¡œ ìƒì„±
 	return res;
 }
 
-void hash_write(char* buf, u32 Seed) {										// hash¸¦ °è»ê
-	XGpio_DiscreteWrite(&Hash_ctrl,2,Seed); 								// Seed ÀÔ·Â
-	XGpio_DiscreteWrite(&Hash_ctrl,1,0); 									// nRST = 1 ÀÔ·Â
+void hash_write(char* buf, u32 Seed) {								// hashë¥¼ ê³„ì‚°
+	XGpio_DiscreteWrite(&Hash_ctrl,2,Seed); 						// Seed ì…ë ¥
+	XGpio_DiscreteWrite(&Hash_ctrl,1,0); 							// nRST = 1 ì…ë ¥
 
-	XGpio_DiscreteWrite(&Hash_ctrl,1,1); 									// nRST = 0 ÀÔ·Â
-	XGpio_DiscreteWrite(&Hash_data,1,string2hex(buf));						// ¹®ÀÚ¸¦ hex·Î º¯È¯ÇÏ°í hasher·Î ÀÔ·Â
-	usleep(1);																// 1us ´ë±â
+	XGpio_DiscreteWrite(&Hash_ctrl,1,1); 							// nRST = 0 ì…ë ¥
+	XGpio_DiscreteWrite(&Hash_data,1,string2hex(buf));					// ë¬¸ìë¥¼ hexë¡œ ë³€í™˜í•˜ê³  hasherë¡œ ì…ë ¥
+	usleep(1);										// 1us ëŒ€ê¸°
 
-	hash_data=XGpio_DiscreteRead(&Hash_data,2);								// °è»êµÈ ÇØ½¬ ÀúÀå
+	hash_data=XGpio_DiscreteRead(&Hash_data,2);						// ê³„ì‚°ëœ í•´ì‰¬ ì €ì¥
 }
 
-void display_string(char* msg) {											// Text LCD·Î ¹®ÀÚ¿­ Ãâ·ÂÇÒ ¼ö ÀÖ´Â ÇÔ¼ö
+void display_string(char* msg) {								// Text LCDë¡œ ë¬¸ìì—´ ì¶œë ¥í•  ìˆ˜ ìˆëŠ” í•¨ìˆ˜
 	clear_LCD();
 	for(int i=0;i<strlen(msg);i++) display_LCD(msg[i]);
 }
 
-int find_hash(int idx) {													// ÁöÁ¤µÈ À§Ä¡¿¡ ¸Ş¸ğ¸®¿¡ ÀúÀåµÈ ÇØ½¬¸¦ °¡Á®¿Í °è»êµÈ ÇØ½¬¿Í ÀÏÄ¡ÇÏ´ÂÁö ¸®ÅÏÇÏ´Â ÇÔ¼ö
+int find_hash(int idx) {									// ì§€ì •ëœ ìœ„ì¹˜ì— ë©”ëª¨ë¦¬ì— ì €ì¥ëœ í•´ì‰¬ë¥¼ ê°€ì ¸ì™€ ê³„ì‚°ëœ í•´ì‰¬ì™€ ì¼ì¹˜í•˜ëŠ”ì§€ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜
 	u32 readMemoryData=Xil_In32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(idx-1));
 	if(hash_data==readMemoryData) return 1;
 	return 0;
 }
 
-void updateHash() {															// ÆÄÀÏ ¸ñ·Ï º¯°æ ½Ã ¸Ş¸ğ¸® À§Ä¡ º¯°æÇØÁÖ´Â ÇÔ¼ö
-	int isHash[101];														// ±âÁ¸ ÆÄÀÏ ÇØ½¬°¡ ÀÖ´ÂÁö È®ÀÎ
+void updateHash() {										// íŒŒì¼ ëª©ë¡ ë³€ê²½ ì‹œ ë©”ëª¨ë¦¬ ìœ„ì¹˜ ë³€ê²½í•´ì£¼ëŠ” í•¨ìˆ˜
+	int isHash[101];									// ê¸°ì¡´ íŒŒì¼ í•´ì‰¬ê°€ ìˆëŠ”ì§€ í™•ì¸
 	memset(isHash,0,sizeof(isHash));
-	for(int i=1;i<=fileIdx;i++) {											// ÆÄÀÏÀ» ¿­¾î ÇØ½¬¸¦ °è»êÇÏ°í ¸Ş¸ğ¸®¿¡ ÀÖ´ÂÁö ¼øÂ÷ Å½»ö
+	for(int i=1;i<=fileIdx;i++) {								// íŒŒì¼ì„ ì—´ì–´ í•´ì‰¬ë¥¼ ê³„ì‚°í•˜ê³  ë©”ëª¨ë¦¬ì— ìˆëŠ”ì§€ ìˆœì°¨ íƒìƒ‰
 		fileRead(i,"0:/");
 		for(int j=1;j<=255;j++) {
 			u32 readMemoryData=Xil_In32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(j-1));
@@ -509,7 +509,7 @@ void updateHash() {															// ÆÄÀÏ ¸ñ·Ï º¯°æ ½Ã ¸Ş¸ğ¸® À§Ä¡ º¯°æÇØÁÖ´Â ÇÔ
 			}
 		}
 	}
-	for(int i=1;i<=fileIdx;i++) {											// ¸Ş¸ğ¸® À§Ä¡ º¯°æ
+	for(int i=1;i<=fileIdx;i++) {								// ë©”ëª¨ë¦¬ ìœ„ì¹˜ ë³€ê²½
 		if(isHash[i]) {
 			fileRead(i,"0:/");
 			Xil_Out32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(i-1),hash_data);
