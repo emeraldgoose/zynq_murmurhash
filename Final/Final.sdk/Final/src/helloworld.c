@@ -1,0 +1,518 @@
+/******************************************************************************
+*
+* Copyright (C) 2009 - 2014 Xilinx, Inc.  All rights reserved.
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* Use of the Software is limited solely to applications:
+* (a) running on a Xilinx device, or
+* (b) that interact with a Xilinx device through a bus or interconnect.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* XILINX  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+* OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+* Except as contained in this notice, the name of the Xilinx shall not be used
+* in advertising or otherwise to promote the sale, use or other dealings in
+* this Software without prior written authorization from Xilinx.
+*
+******************************************************************************/
+
+/*
+ * helloworld.c: simple test application
+ *
+ * This application configures UART 16550 to baud rate 9600.
+ * PS7 UART (Zynq) is not initialized by this application, since
+ * bootrom/bsp configures it to baud rate 115200
+ *
+ * ------------------------------------------------
+ * | UART TYPE   BAUD RATE                        |
+ * ------------------------------------------------
+ *   uartns550   9600
+ *   uartlite    Configurable only in HW design
+ *   ps7_uart    115200 (configured by bootrom/bsp)
+ *
+ * 정보통신공학과 14010843 김민성
+ *
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "ff.h"
+#include "sleep.h"
+#include "xstatus.h"
+#include "xil_io.h"
+#include "xgpio.h"
+#include "xscugic.h"
+#include "xil_exception.h"
+#include "xil_cache.h"
+#include "xsdps.h"
+
+#define INITIAL_VALUE 0x6a09e667
+
+XGpio LEDInst, PUSH_SWInst, LCD_Inst, Hash_data, Hash_ctrl;
+XScuGic INTCInst;
+
+// Global variation
+static int push_sw_data;
+static int mode;			// 0: select file, 1: readfile, find hash, 2: save hash
+static int button;			// 1, 2, 3, 4
+u32 hash_data;				// 32bit Hash
+int fileIdx;				// File Index
+int addressIdx;				// Memory Address 간격
+
+// file variation
+FIL fil;					// File object structure (FIL)
+FILINFO fno[257];			// File status structure (FILINFO)
+FRESULT res;				// File function return code (FRESULT)
+DIR dir;					// Directory object structure (DIR)
+FATFS fs32;					// File system object structure (FATFS)
+char dataBuffer[4];			// 4Byte Buffer
+
+//function list
+void BTN_Intr_Handler(void *InstancePtr);
+int InterruptSystemSetup(XScuGic *XScuGicInstancePtr);
+int IntcInitFunction(u16 DeviceId, XGpio *GpioInstancePtr);
+void display_LCD(int alpha);
+void init_LCD();
+void clear_LCD();
+void f_opendir_scan(char *Path);
+void fileRead(int idx, char* path);
+u32 string2hex(char* msg);
+void hash_write(char* buf, u32 Seed);
+void display_string(char* msg);
+int find_hash(int idx);
+void updateHash();
+
+// Interrupt Handler
+#define BTN_INT XGPIO_IR_CH1_MASK
+
+int main() {
+	xil_printf("Hello\n\r");	// hello?
+
+	int status;
+	u32 IV = INITIAL_VALUE;		// 해쉬 초기 Seed 값
+	TCHAR *Path="0:/";			// SD 최상단 폴더
+	char* fileName;				// 파일 이름
+
+	// Initialize LCD
+	status =XGpio_Initialize(&LCD_Inst, XPAR_LCD_DEVICE_ID);
+	if (status != XST_SUCCESS) {
+		xil_printf("LCD initialize failed");
+		return XST_FAILURE;
+	}
+
+	// Initialize Push Buttons
+	status = XGpio_Initialize(&PUSH_SWInst, XPAR_PUSH_SW_DEVICE_ID);
+	if (status != XST_SUCCESS) {
+		xil_printf("PUSH BUTTONS initialize failed");
+		return XST_FAILURE;
+	}
+
+	// Hash initialize
+	status=XGpio_Initialize(&Hash_data,XPAR_HASH_DATA_DEVICE_ID);
+	if(status!=XST_SUCCESS) {
+		xil_printf("Hash_data Gpio initialize failed");
+		return XST_FAILURE;
+	}
+
+	status=XGpio_Initialize(&Hash_ctrl,XPAR_HASH_CTRL_DEVICE_ID);
+	if(status!=XST_SUCCESS) {
+		xil_printf("Hash_ctrl Gpio initialize failed");
+		return XST_FAILURE;
+	}
+
+	// Initialize LED
+	status=XGpio_Initialize(&LEDInst,XPAR_LED_DEVICE_ID);
+	if(status!=XST_SUCCESS) {
+		xil_printf("LED Gpio initialize failed");
+		return XST_FAILURE;
+	}
+
+	/* Set gpio direction */
+	XGpio_SetDataDirection(&LCD_Inst, 1, 0x00); 		// Set LCD direction to outputs
+
+	XGpio_SetDataDirection(&PUSH_SWInst, 1, 0xFF); 		// Set all buttons direction to inputs
+
+	XGpio_SetDataDirection(&Hash_data,1,0x00); 			// data_in
+	XGpio_SetDataDirection(&Hash_data,2,0xff); 			// data_out
+	XGpio_SetDataDirection(&Hash_ctrl,1,0x00); 			// reset
+	XGpio_SetDataDirection(&Hash_ctrl,2,0x00); 			// Seed
+
+	XGpio_SetDataDirection(&LEDInst,1,0xff);			// Set LED direction
+
+	// Initialize interrupt controller
+	status = IntcInitFunction(XPAR_PS7_SCUGIC_0_DEVICE_ID, &PUSH_SWInst);
+	if (status != XST_SUCCESS) {
+		xil_printf("Interrupt controller initialize failed");
+		return XST_FAILURE;
+	}
+
+	char* buf=""; 										// 첫번째 해쉬 출력은 버려야 함
+	hash_write(buf,IV);
+
+	/////////////////////////////////////////////////////////////////////
+
+	fileIdx=0;											// fileIndex initialize
+	init_LCD();
+
+	xil_printf("Hashing Program\n\r");
+	display_string("Hashing Program");
+
+	for(int i=1;i<=8;i++) {								// 2sec hold, Loading
+		XGpio_DiscreteWrite(&LEDInst,1,(1<<i));			// LED 1번부터 8번까지 250ms 간격으로 순차 점등
+		usleep(250000);
+	}
+	XGpio_DiscreteWrite(&LEDInst,1,0);					// LED 소등
+
+	addressIdx=-32;										// addr initialize, 처음 저장하는 장소를 BASEADDR로 하기 위함
+	int idx=1; 											// file idx, 0: Root "0:/"
+	int is_mount=0, pMount=0;							// 현재 마운트 정보, 이전 마운트 정보
+	mode=0;												// state
+
+	while(1) {
+		res=f_mount(&fs32,Path,1);						// SD 마운트 시도
+
+		if(res!=FR_OK) {								// Unmounted
+			XGpio_DiscreteWrite(&LEDInst,1,0x80);		// 8번 LED 점등
+			xil_printf("Unmounted\n\r");
+			display_string("Unmounted");
+			is_mount=0;
+			mode=0;
+			continue;
+		}
+		else {											// Mounted
+			is_mount=1;
+			fileIdx=0;									// fileIdx 초기화 (파일 목록이 바뀔 수 있기 때문)
+			f_opendir_scan(Path);						// SD 폴더 스캔
+			XGpio_DiscreteWrite(&LEDInst,1,0x40);		// 7번 LED 점등
+		}
+
+		if(is_mount!=pMount) {							// 이전 마운트 정보와 현재 마운트 정보가 다르면 SD 입력이 달라졌음을 의미
+			if(is_mount==1 && pMount==0) updateHash();	// 파일 목록이 변경됬을 때 파일 인덱스 정보도 변경되므로 메모리 정보를 변경
+			pMount=is_mount;							// 이전 마운트 정보 업데이트
+		}
+
+		if(is_mount && mode==0) {
+			XGpio_DiscreteWrite(&LEDInst,1,0x41);		// LED 1번, 7번 점등
+			if(button==1) { 							// up index
+				idx++;
+				if(idx>fileIdx) idx=1;
+				button=0;								// 버튼 입력이 유지되지 않도록 초기화
+			}
+			else if(button==2) { 						// down index
+				idx--;
+				if(idx<1) idx=fileIdx;
+				button=0;								// 버튼 입력이 유지되지 않도록 초기화
+			}
+			else if(button==3) mode=1, button=0;
+
+			fileName=fno[idx].fname;					// FILINFO 구조체의 fname을 저장
+			display_string(fileName);					// LCD로 출력
+			xil_printf("\r                        \r"); // 시리얼 버퍼제거
+			xil_printf("\rFileName : %s\r",fileName);	// 시리얼로 출력
+		}
+
+		else if(is_mount && mode==1) {
+			XGpio_DiscreteWrite(&LEDInst,1,0x42);		// LED 2번, 7번 점등
+			xil_printf("\n");
+			fileRead(idx, Path); 						// Select this file and calculate hash
+
+			if(find_hash(idx)) { 						// same hash in memory, this file is original
+				xil_printf("Original file\n\n\r");
+
+				display_string("Origianl FIL");
+				sleep(2); 								// 2sec hold
+
+				mode=0;
+			}
+			else { 										// 메모리에 없거나 원본이 아님
+				xil_printf("Not original file\n\r");
+
+				display_string("Not original FIL");
+				sleep(2); 								// 1sec hold
+
+				mode=2;									// 다음 모드로 변경
+			}
+			xil_printf("\n");
+		}
+
+		else if(is_mount && mode==2) {
+			XGpio_DiscreteWrite(&LEDInst,1,0x44);		// LED 3번, 7번 점등
+
+			xil_printf("Save the file?\r");
+			display_string("Save the file?");
+
+			if(button==1) {								// fileIdx 값에 따라 저장되는 위치가 달라짐
+				addressIdx=32*(idx-1);					// BASEADDR에 addressIdx 값을 더해 저장하기 때문에 32bit씩 건너띄어 저장
+				xil_printf("\nYes\n\r");
+				Xil_Out32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+addressIdx,hash_data);
+				xil_printf("addr=%d, Hash saved\n\n\r",addressIdx);
+				button=0;								// 버튼 입력이 유지되지 않도록 초기화
+				mode=0;									// 저장 완료 후 모드 변경 (->0)
+			}
+			else if(button==2){
+				xil_printf("\nNo\n\n\r");
+				button=0;								// 버튼 입력이 유지되지 않도록 초기화
+				mode=0;									// 저장 완료 후 모드 변경 (->0)
+			}
+		}
+	}
+    return 0;
+}
+
+void BTN_Intr_Handler(void *InstancePtr) {
+	// Disable GPIO interrupts
+	XGpio_InterruptDisable(&PUSH_SWInst,BTN_INT);
+
+	// Ignore additional button presses
+	if ((XGpio_InterruptGetStatus(&PUSH_SWInst) & BTN_INT) != BTN_INT) return;
+
+	// Increment counter based on button value
+	// Reset if central button pressed
+	push_sw_data = XGpio_DiscreteRead(&PUSH_SWInst, 1);
+
+	if(push_sw_data==14) button=1;
+	else if(push_sw_data==13) button=2;
+	else if(push_sw_data==11) button=3;
+	else button=0;
+
+	(void) XGpio_InterruptClear(&PUSH_SWInst, BTN_INT);
+
+	// Enable GPIO interrupts
+	XGpio_InterruptEnable(&PUSH_SWInst, BTN_INT);
+}
+
+//인터럽트 시스템
+int InterruptSystemSetup(XScuGic *XScuGicInstancePtr) {
+	// Enable interrupt
+	XGpio_InterruptEnable(&PUSH_SWInst, BTN_INT);
+	XGpio_InterruptGlobalEnable(&PUSH_SWInst);
+
+	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+			(Xil_ExceptionHandler) XScuGic_InterruptHandler,
+			XScuGicInstancePtr);
+	Xil_ExceptionEnable();
+
+	return XST_SUCCESS;
+}
+
+int IntcInitFunction(u16 DeviceId, XGpio *GpioInstancePtr) {
+	XScuGic_Config *IntcConfig;
+	int status;
+
+	// Interrupt controller initialization
+	IntcConfig = XScuGic_LookupConfig(DeviceId);
+	status = XScuGic_CfgInitialize(&INTCInst, IntcConfig,
+			IntcConfig->CpuBaseAddress);
+	if (status != XST_SUCCESS)
+		return XST_FAILURE;
+
+	// Call to interrupt setup
+	status = InterruptSystemSetup(&INTCInst);
+	if (status != XST_SUCCESS)
+		return XST_FAILURE;
+
+	// Connect GPIO interrupt to handler
+	status = XScuGic_Connect(&INTCInst, XPAR_FABRIC_PUSH_SW_IP2INTC_IRPT_INTR,
+			(Xil_ExceptionHandler) BTN_Intr_Handler, (void *) GpioInstancePtr);
+	if (status != XST_SUCCESS)
+		return XST_FAILURE;
+
+	// Enable GPIO interrupts interrupt
+	XGpio_InterruptEnable(GpioInstancePtr, 1);
+	XGpio_InterruptGlobalEnable(GpioInstancePtr);
+
+	// Enable GPIO and timer interrupts in the controller
+	XScuGic_Enable(&INTCInst, XPAR_FABRIC_PUSH_SW_IP2INTC_IRPT_INTR);
+
+	return XST_SUCCESS;
+}
+
+//text-LCD initialize
+void init_LCD() {
+    XGpio_DiscreteWrite(&LCD_Inst, 1, 56);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 312);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 56);
+	usleep(4000);
+
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 14);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 270);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 14);
+	usleep(4000);
+
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 6);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 262);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 6);
+	usleep(4000);
+
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 1);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 257);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 1);
+	usleep(4000);
+}
+
+//특정 문자를 LCD로 출력하기위한 함수
+void display_LCD(int alpha) {
+    XGpio_DiscreteWrite(&LCD_Inst, 1, alpha+1024);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, alpha+1280);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, alpha+1024);
+	usleep(4000);
+}
+
+//LCD clear
+void clear_LCD() {
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 1);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 257);
+	usleep(6000);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 1);
+	usleep(4000);
+}
+
+void f_opendir_scan(char *Path) {											// open directory & scan
+    TCHAR path[200] = "";
+    res = f_mount(&fs32,Path,1);											// Mount a logical drive
+//  printf("SD Mount : res f_mount : %02X\n\r",res);
+
+    if (res == FR_OK)
+    {
+    	res = f_opendir(&dir,path);											// Open a directory
+//      printf("res f_open : %02X\n\r",res);
+        if (res == FR_OK)
+        {
+        	while(1)
+        	{
+				res = f_readdir(&dir, &fno[fileIdx]);						// Read a directory item
+
+				if(res!=FR_OK) display_string("Empty folder");
+
+				if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break;	// readdir 리턴값이 FR_OK가 아니거나 파일 이름이 없으면 종료
+				else fileIdx++;
+
+			}
+
+		}
+        res=f_closedir(&dir);												// Close an open directory
+    }
+    else return;
+
+    res = f_mount(0,Path,0); 												// Unmount
+    fileIdx-=1;																// 마지막 루프에서 하나 더 카운트 되므로 하나 빼준다
+}
+
+void fileRead(int idx, char* path) { 										// read file
+	UINT br;																// Pointer to the UINT variable that receives number of bytes read
+	char *fn;																// file name
+
+	res = f_mount(&fs32,path,1);											// Mount a logical drive
+	if(res!=FR_OK) {
+		xil_printf("failed mount\n\r");
+		return;
+	}
+
+	fn=fno[idx].fname;
+	if(fn==0) return;														// 파일 이름이 없으면 종료
+
+	res=f_open(&fil,fn,FA_READ);											// Open a file
+
+	if(res==FR_OK) {
+		int cnt=0;
+		DWORD fsk_offset=0;
+
+		for(int i=0;i<fil.fsize;i+=4) {
+			memset(dataBuffer,0,sizeof(dataBuffer));						// initialize buffer
+
+			res=f_lseek(&fil,fsk_offset);									// Move file pointer of a file object
+			res=f_read(&fil,(void*)dataBuffer,4,&br);						// Read data from a file
+
+			if(cnt==0) hash_write(dataBuffer,(u32)INITIAL_VALUE);			// 처음 해쉬는 시드로 초기값 넣고 계산
+			else hash_write(dataBuffer,hash_data);							// 두번째 이상 해쉬는 시드로 이전 해쉬를 넣고 계산
+
+			fsk_offset+=4;													// 오프셋 4바이트 뒤로 이동
+			cnt++;
+		}
+	}
+	else {
+		xil_printf("failed open\n\r");
+		display_string("failed open");
+		return;
+	}
+
+	res=f_close(&fil); 														// file close
+	res = f_mount(&fs32,path,0); 											// Unmount a logical drive
+}
+
+u32 string2hex(char* msg) { 												// 4Bytes String to hex
+	u32 res=0;
+	res += ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]);			// msg 원소를 시프트시켜 32bit로 생성
+	return res;
+}
+
+void hash_write(char* buf, u32 Seed) {										// hash를 계산
+	XGpio_DiscreteWrite(&Hash_ctrl,2,Seed); 								// Seed 입력
+	XGpio_DiscreteWrite(&Hash_ctrl,1,0); 									// nRST = 1 입력
+
+	XGpio_DiscreteWrite(&Hash_ctrl,1,1); 									// nRST = 0 입력
+	XGpio_DiscreteWrite(&Hash_data,1,string2hex(buf));						// 문자를 hex로 변환하고 hasher로 입력
+	usleep(1);																// 1us 대기
+
+	hash_data=XGpio_DiscreteRead(&Hash_data,2);								// 계산된 해쉬 저장
+}
+
+void display_string(char* msg) {											// Text LCD로 문자열 출력할 수 있는 함수
+	clear_LCD();
+	for(int i=0;i<strlen(msg);i++) display_LCD(msg[i]);
+}
+
+int find_hash(int idx) {													// 지정된 위치에 메모리에 저장된 해쉬를 가져와 계산된 해쉬와 일치하는지 리턴하는 함수
+	u32 readMemoryData=Xil_In32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(idx-1));
+	if(hash_data==readMemoryData) return 1;
+	return 0;
+}
+
+void updateHash() {															// 파일 목록 변경 시 메모리 위치 변경해주는 함수
+	int isHash[101];														// 기존 파일 해쉬가 있는지 확인
+	memset(isHash,0,sizeof(isHash));
+	for(int i=1;i<=fileIdx;i++) {											// 파일을 열어 해쉬를 계산하고 메모리에 있는지 순차 탐색
+		fileRead(i,"0:/");
+		for(int j=1;j<=255;j++) {
+			u32 readMemoryData=Xil_In32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(j-1));
+			if(hash_data==readMemoryData) {
+				isHash[i]=1; break;
+			}
+		}
+	}
+	for(int i=1;i<=fileIdx;i++) {											// 메모리 위치 변경
+		if(isHash[i]) {
+			fileRead(i,"0:/");
+			Xil_Out32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(i-1),hash_data);
+		}
+	}
+}

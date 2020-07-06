@@ -1,0 +1,8 @@
+vhdl xil_defaultlib  \
+"../../../bd/mcu/ip/mcu_axi_gpio_0_0/sim/mcu_axi_gpio_0_0.vhd" \
+"../../../bd/mcu/ip/mcu_axi_gpio_0_4/sim/mcu_axi_gpio_0_4.vhd" \
+"../../../bd/mcu/ip/mcu_axi_gpio_0_5/sim/mcu_axi_gpio_0_5.vhd" \
+"../../../bd/mcu/ip/mcu_rst_ps7_0_50M_1/sim/mcu_rst_ps7_0_50M_1.vhd" \
+"../../../bd/mcu/ip/mcu_axi_bram_ctrl_0_0/sim/mcu_axi_bram_ctrl_0_0.vhd" \
+
+nosort

@@ -1,0 +1,824 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Wed Jun 17 13:06:14 2020
+# Process ID: 14256
+# Current directory: C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1
+# Command line: vivado.exe -log mcu_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source mcu_wrapper.tcl -notrace
+# Log file: C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper.vdi
+# Journal file: C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source mcu_wrapper.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/smk62/Documents/vivado/HASH/HASH.srcs'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/smk62/Documents/vivado/project_2/project_2.srcs'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Xilinx/Vivado/2017.4/data/ip'.
+Command: link_design -top mcu_wrapper -part xc7z020clg484-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_1/mcu_axi_gpio_0_1.dcp' for cell 'mcu_i/Hash_Ctrl'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_2/mcu_axi_gpio_0_2.dcp' for cell 'mcu_i/Hash_data'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_blk_mem_gen_0_1/mcu_blk_mem_gen_0_1.dcp' for cell 'mcu_i/Index_mem'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_bram_ctrl_0_0/mcu_axi_bram_ctrl_0_0.dcp' for cell 'mcu_i/axi_bram_ctrl_0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_hash_0_0/mcu_hash_0_0.dcp' for cell 'mcu_i/hash_0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_4/mcu_axi_gpio_0_4.dcp' for cell 'mcu_i/lcd'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_5/mcu_axi_gpio_0_5.dcp' for cell 'mcu_i/led'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_processing_system7_0_1/mcu_processing_system7_0_1.dcp' for cell 'mcu_i/processing_system7_0'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_0/mcu_axi_gpio_0_0.dcp' for cell 'mcu_i/push_sw'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_rst_ps7_0_50M_1/mcu_rst_ps7_0_50M_1.dcp' for cell 'mcu_i/rst_ps7_0_50M'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_xbar_1/mcu_xbar_1.dcp' for cell 'mcu_i/ps7_0_axi_periph/xbar'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_auto_pc_0/mcu_auto_pc_0.dcp' for cell 'mcu_i/ps7_0_axi_periph/m00_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_auto_pc_1/mcu_auto_pc_1.dcp' for cell 'mcu_i/ps7_0_axi_periph/m01_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_auto_pc_2/mcu_auto_pc_2.dcp' for cell 'mcu_i/ps7_0_axi_periph/m02_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_auto_pc_3/mcu_auto_pc_3.dcp' for cell 'mcu_i/ps7_0_axi_periph/m04_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_auto_pc_4/mcu_auto_pc_4.dcp' for cell 'mcu_i/ps7_0_axi_periph/m05_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint 'c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_auto_pc_5/mcu_auto_pc_5.dcp' for cell 'mcu_i/ps7_0_axi_periph/s00_couplers/auto_pc'
+INFO: [Netlist 29-17] Analyzing 126 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2017.4
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_0/mcu_axi_gpio_0_0_board.xdc] for cell 'mcu_i/push_sw/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_0/mcu_axi_gpio_0_0_board.xdc] for cell 'mcu_i/push_sw/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_0/mcu_axi_gpio_0_0.xdc] for cell 'mcu_i/push_sw/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_0/mcu_axi_gpio_0_0.xdc] for cell 'mcu_i/push_sw/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_4/mcu_axi_gpio_0_4_board.xdc] for cell 'mcu_i/lcd/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_4/mcu_axi_gpio_0_4_board.xdc] for cell 'mcu_i/lcd/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_4/mcu_axi_gpio_0_4.xdc] for cell 'mcu_i/lcd/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_4/mcu_axi_gpio_0_4.xdc] for cell 'mcu_i/lcd/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_5/mcu_axi_gpio_0_5_board.xdc] for cell 'mcu_i/led/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_5/mcu_axi_gpio_0_5_board.xdc] for cell 'mcu_i/led/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_5/mcu_axi_gpio_0_5.xdc] for cell 'mcu_i/led/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_5/mcu_axi_gpio_0_5.xdc] for cell 'mcu_i/led/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_processing_system7_0_1/mcu_processing_system7_0_1.xdc] for cell 'mcu_i/processing_system7_0/inst'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_processing_system7_0_1/mcu_processing_system7_0_1.xdc] for cell 'mcu_i/processing_system7_0/inst'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_rst_ps7_0_50M_1/mcu_rst_ps7_0_50M_1_board.xdc] for cell 'mcu_i/rst_ps7_0_50M/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_rst_ps7_0_50M_1/mcu_rst_ps7_0_50M_1_board.xdc] for cell 'mcu_i/rst_ps7_0_50M/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_rst_ps7_0_50M_1/mcu_rst_ps7_0_50M_1.xdc] for cell 'mcu_i/rst_ps7_0_50M/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_rst_ps7_0_50M_1/mcu_rst_ps7_0_50M_1.xdc] for cell 'mcu_i/rst_ps7_0_50M/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_1/mcu_axi_gpio_0_1_board.xdc] for cell 'mcu_i/Hash_Ctrl/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_1/mcu_axi_gpio_0_1_board.xdc] for cell 'mcu_i/Hash_Ctrl/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_1/mcu_axi_gpio_0_1.xdc] for cell 'mcu_i/Hash_Ctrl/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_1/mcu_axi_gpio_0_1.xdc] for cell 'mcu_i/Hash_Ctrl/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_2/mcu_axi_gpio_0_2_board.xdc] for cell 'mcu_i/Hash_data/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_2/mcu_axi_gpio_0_2_board.xdc] for cell 'mcu_i/Hash_data/U0'
+Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_2/mcu_axi_gpio_0_2.xdc] for cell 'mcu_i/Hash_data/U0'
+Finished Parsing XDC File [c:/Users/smk62/Documents/vivado/Final/Final.srcs/sources_1/bd/mcu/ip/mcu_axi_gpio_0_2/mcu_axi_gpio_0_2.xdc] for cell 'mcu_i/Hash_data/U0'
+Parsing XDC File [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc]
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[0]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:1]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:1]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[1]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:2]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:2]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[2]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:3]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:3]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[3]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:4]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:4]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:5]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:5]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:6]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:6]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:7]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:7]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:8]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:8]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:13]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:13]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:14]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:14]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:15]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:15]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:16]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:16]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[8]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:17]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:17]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[9]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:18]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:18]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[10]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:19]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:19]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[11]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:20]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:20]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[12]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:21]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:21]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[13]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:22]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:22]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[14]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:23]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:23]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[15]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:24]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:24]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[16]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:25]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:25]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[17]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:26]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:26]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[18]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:27]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:27]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[19]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:28]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:28]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[20]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:29]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:29]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[21]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:30]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:30]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[22]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:31]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:31]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[23]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:32]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:32]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[24]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:33]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:33]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[25]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:34]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:34]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[26]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:35]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:35]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[27]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:36]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:36]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[28]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:37]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:37]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[29]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:38]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:38]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[30]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:39]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:39]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'push_sw_tri_i[31]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:40]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:40]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[0]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:52]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:52]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[1]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:53]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:53]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[2]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:54]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:54]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[3]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:55]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:55]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:56]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:56]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:57]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:57]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:58]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:58]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:59]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:59]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[0]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:68]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:68]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[1]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:69]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:69]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[2]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:70]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:70]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[3]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:71]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:71]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:72]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:72]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:73]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:73]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:74]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:74]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:75]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:75]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:76]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:76]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:77]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:77]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:78]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:78]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:79]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:79]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[3]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:80]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:80]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[2]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:81]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:81]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[1]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:82]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:82]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'dip_sw_tri_i[0]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:83]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:83]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:84]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:84]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:85]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:85]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:86]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:86]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:87]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:87]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[3]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:88]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:88]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[2]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:89]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:89]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[1]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:90]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:90]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'con_fnd_tri_o[0]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:91]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:91]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[7]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:92]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:92]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[6]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:93]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:93]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[5]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:94]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:94]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[4]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:95]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:95]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[3]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:96]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:96]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[2]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:97]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:97]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[1]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:98]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:98]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'num_fnd_tri_o[0]'. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:99]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc:99]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [C:/Users/smk62/Documents/vivado/Final/Final.srcs/constrs_1/imports/new/Lab_5.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Generating merged BMM file for the design top 'mcu_wrapper'...
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+28 Infos, 76 Warnings, 76 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 726.039 ; gain = 400.656
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.893 . Memory (MB): peak = 730.359 ; gain = 4.320
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 1 inverter(s) to 4 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: 2226f2d4b
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1282.891 ; gain = 0.000
+INFO: [Opt 31-389] Phase Retarget created 77 cells and removed 112 cells
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: 2206815db
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1282.891 ; gain = 0.000
+INFO: [Opt 31-389] Phase Constant propagation created 114 cells and removed 424 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 2114e67a5
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1282.891 ; gain = 0.000
+INFO: [Opt 31-389] Phase Sweep created 19 cells and removed 1057 cells
+
+Phase 4 BUFG optimization
+Phase 4 BUFG optimization | Checksum: 2114e67a5
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1282.891 ; gain = 0.000
+INFO: [Opt 31-389] Phase BUFG optimization created 0 cells and removed 0 cells
+
+Phase 5 Shift Register Optimization
+Phase 5 Shift Register Optimization | Checksum: 2114e67a5
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1282.891 ; gain = 0.000
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1282.891 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: 1fb8c8911
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1282.891 ; gain = 0.000
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+INFO: [Pwropt 34-9] Applying IDT optimizations ...
+INFO: [Pwropt 34-10] Applying ODC optimizations ...
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=13.674 | TNS=0.000 |
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+
+
+Starting PowerOpt Patch Enables Task
+INFO: [Pwropt 34-162] WRITE_MODE attribute of 0 BRAM(s) out of a total of 2 has been updated to save power. Run report_power_opt to get a complete listing of the BRAMs updated.
+INFO: [Pwropt 34-201] Structural ODC has moved 0 WE to EN ports
+Number of BRAM Ports augmented: 0 newly gated: 0 Total Ports: 4
+Ending PowerOpt Patch Enables Task | Checksum: 1fdd1c730
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.053 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Ending Power Optimization Task | Checksum: 1fdd1c730
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 1432.188 ; gain = 149.297
+INFO: [Common 17-83] Releasing license: Implementation
+49 Infos, 76 Warnings, 76 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1432.188 ; gain = 706.148
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.101 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper_opt.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file mcu_wrapper_drc_opted.rpt -pb mcu_wrapper_drc_opted.pb -rpx mcu_wrapper_drc_opted.rpx
+Command: report_drc -file mcu_wrapper_drc_opted.rpt -pb mcu_wrapper_drc_opted.pb -rpx mcu_wrapper_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Coretcl 2-168] The results of DRC are in file C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper_drc_opted.rpt.
+report_drc completed successfully
+INFO: [Chipscope 16-241] No debug cores found in the current design.
+Before running the implement_debug_core command, either use the Set Up Debug wizard (GUI mode)
+or use the create_debug_core and connect_debug_core Tcl commands to insert debug cores into the design.
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 2 CPUs
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 109518233
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.097 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 102277d9e
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 227a2c18c
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 227a2c18c
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 227a2c18c
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 2 Global Placement
+Phase 2 Global Placement | Checksum: 1b6f52382
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:11 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 1b6f52382
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:11 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 173e0fdd8
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:12 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: e2c9e811
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:12 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: e2c9e811
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:12 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3.5 Small Shape Detail Placement
+Phase 3.5 Small Shape Detail Placement | Checksum: 1a9b702dd
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3.6 Re-assign LUT pins
+Phase 3.6 Re-assign LUT pins | Checksum: 16bfac12e
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 3.7 Pipeline Register Optimization
+Phase 3.7 Pipeline Register Optimization | Checksum: 16bfac12e
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Phase 3 Detail Placement | Checksum: 16bfac12e
+
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:15 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: eae3b421
+
+Phase 4.1.1.1 BUFG Insertion
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
+INFO: [Place 46-31] BUFG insertion identified 0 candidate nets, 0 success, 0 skipped for placement/routing, 0 skipped for timing, 0 skipped for netlist change reason.
+Phase 4.1.1.1 BUFG Insertion | Checksum: eae3b421
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [Place 30-746] Post Placement Timing Summary WNS=12.878. For the most accurate timing information please run report_timing.
+Phase 4.1.1 Post Placement Optimization | Checksum: 1684f75ed
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Phase 4.1 Post Commit Optimization | Checksum: 1684f75ed
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 1684f75ed
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 4.3 Placer Reporting
+Phase 4.3 Placer Reporting | Checksum: 1684f75ed
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+
+Phase 4.4 Final Placement Cleanup
+Phase 4.4 Final Placement Cleanup | Checksum: 1336204c2
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1336204c2
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Ending Placer Task | Checksum: 61b35884
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+71 Infos, 76 Warnings, 76 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:19 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.640 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper_placed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_io -file mcu_wrapper_io_placed.rpt
+report_io: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.117 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [runtcl-4] Executing : report_utilization -file mcu_wrapper_utilization_placed.rpt -pb mcu_wrapper_utilization_placed.pb
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.108 . Memory (MB): peak = 1432.188 ; gain = 0.000
+INFO: [runtcl-4] Executing : report_control_sets -verbose -file mcu_wrapper_control_sets_placed.rpt
+report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 1432.188 ; gain = 0.000
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 2 CPUs
+Checksum: PlaceDB: 74295d4 ConstDB: 0 ShapeSum: 5a70c2b0 RouteDB: 0
+
+Phase 1 Build RT Design
+Phase 1 Build RT Design | Checksum: 1079a9bc3
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:33 . Memory (MB): peak = 1449.066 ; gain = 16.879
+Post Restoration Checksum: NetGraph: 92e304a5 NumContArr: 74b7971e Constraints: 0 Timing: 0
+
+Phase 2 Router Initialization
+
+Phase 2.1 Create Timer
+Phase 2.1 Create Timer | Checksum: 1079a9bc3
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:33 . Memory (MB): peak = 1449.066 ; gain = 16.879
+
+Phase 2.2 Fix Topology Constraints
+Phase 2.2 Fix Topology Constraints | Checksum: 1079a9bc3
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:33 . Memory (MB): peak = 1449.066 ; gain = 16.879
+
+Phase 2.3 Pre Route Cleanup
+Phase 2.3 Pre Route Cleanup | Checksum: 1079a9bc3
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:33 . Memory (MB): peak = 1449.066 ; gain = 16.879
+ Number of Nodes with overlaps = 0
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 676fcd9d
+
+Time (s): cpu = 00:00:38 ; elapsed = 00:00:35 . Memory (MB): peak = 1461.086 ; gain = 28.898
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=12.944 | TNS=0.000  | WHS=-0.354 | THS=-79.567|
+
+Phase 2 Router Initialization | Checksum: 6c7c46ee
+
+Time (s): cpu = 00:00:39 ; elapsed = 00:00:36 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 3 Initial Routing
+Phase 3 Initial Routing | Checksum: 10cccccc3
+
+Time (s): cpu = 00:00:40 ; elapsed = 00:00:36 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 402
+ Number of Nodes with overlaps = 8
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=11.804 | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 21387f20e
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 4.2 Global Iteration 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=11.804 | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.2 Global Iteration 1 | Checksum: 138036904
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+Phase 4 Rip-up And Reroute | Checksum: 138036904
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 138036904
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 138036904
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+Phase 5 Delay and Skew Optimization | Checksum: 138036904
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 175b508ff
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=11.919 | TNS=0.000  | WHS=0.014  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 16a7dbbfc
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+Phase 6 Post Hold Fix | Checksum: 16a7dbbfc
+
+Time (s): cpu = 00:00:43 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.87346 %
+  Global Horizontal Routing Utilization  = 1.05358 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 1c24e0940
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 1c24e0940
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:38 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 158877607
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:39 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=11.919 | TNS=0.000  | WHS=0.014  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 158877607
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:39 . Memory (MB): peak = 1500.555 ; gain = 68.367
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:39 . Memory (MB): peak = 1500.555 ; gain = 68.367
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+88 Infos, 76 Warnings, 76 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:00:47 ; elapsed = 00:00:41 . Memory (MB): peak = 1500.555 ; gain = 68.367
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 1500.555 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper_routed.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file mcu_wrapper_drc_routed.rpt -pb mcu_wrapper_drc_routed.pb -rpx mcu_wrapper_drc_routed.rpx
+Command: report_drc -file mcu_wrapper_drc_routed.rpt -pb mcu_wrapper_drc_routed.pb -rpx mcu_wrapper_drc_routed.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Coretcl 2-168] The results of DRC are in file C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper_drc_routed.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_methodology -file mcu_wrapper_methodology_drc_routed.rpt -pb mcu_wrapper_methodology_drc_routed.pb -rpx mcu_wrapper_methodology_drc_routed.rpx
+Command: report_methodology -file mcu_wrapper_methodology_drc_routed.rpt -pb mcu_wrapper_methodology_drc_routed.pb -rpx mcu_wrapper_methodology_drc_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-133] Running Methodology with 2 threads
+INFO: [Coretcl 2-1520] The results of Report Methodology are in file C:/Users/smk62/Documents/vivado/Final/Final.runs/impl_1/mcu_wrapper_methodology_drc_routed.rpt.
+report_methodology completed successfully
+INFO: [runtcl-4] Executing : report_power -file mcu_wrapper_power_routed.rpt -pb mcu_wrapper_power_summary_routed.pb -rpx mcu_wrapper_power_routed.rpx
+Command: report_power -file mcu_wrapper_power_routed.rpt -pb mcu_wrapper_power_summary_routed.pb -rpx mcu_wrapper_power_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+100 Infos, 76 Warnings, 76 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+INFO: [runtcl-4] Executing : report_route_status -file mcu_wrapper_route_status.rpt -pb mcu_wrapper_route_status.pb
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file mcu_wrapper_timing_summary_routed.rpt -rpx mcu_wrapper_timing_summary_routed.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+INFO: [runtcl-4] Executing : report_incremental_reuse -file mcu_wrapper_incremental_reuse_routed.rpt
+INFO: [Vivado_Tcl 4-545] No incremental reuse to report, no incremental placement and routing data was found.
+INFO: [runtcl-4] Executing : report_clock_utilization -file mcu_wrapper_clock_utilization_routed.rpt
+Command: write_bitstream -force mcu_wrapper.bit
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+Running DRC as a precondition to command write_bitstream
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 2 threads
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return0 input mcu_i/hash_0/inst/murmur_return0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return0__0 input mcu_i/hash_0/inst/murmur_return0__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return0__1 input mcu_i/hash_0/inst/murmur_return0__1/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return3 input mcu_i/hash_0/inst/murmur_return3/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return3__0 input mcu_i/hash_0/inst/murmur_return3__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return3__2 input mcu_i/hash_0/inst/murmur_return3__2/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return3__3 input mcu_i/hash_0/inst/murmur_return3__3/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return3__4 input mcu_i/hash_0/inst/murmur_return3__4/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return5 input mcu_i/hash_0/inst/murmur_return5/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return5__0 input mcu_i/hash_0/inst/murmur_return5__0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP mcu_i/hash_0/inst/murmur_return5__1 input mcu_i/hash_0/inst/murmur_return5__1/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return0 output mcu_i/hash_0/inst/murmur_return0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return0__0 output mcu_i/hash_0/inst/murmur_return0__0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return0__1 output mcu_i/hash_0/inst/murmur_return0__1/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3 output mcu_i/hash_0/inst/murmur_return3/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__0 output mcu_i/hash_0/inst/murmur_return3__0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__1 output mcu_i/hash_0/inst/murmur_return3__1/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__2 output mcu_i/hash_0/inst/murmur_return3__2/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__3 output mcu_i/hash_0/inst/murmur_return3__3/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__4 output mcu_i/hash_0/inst/murmur_return3__4/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return5 output mcu_i/hash_0/inst/murmur_return5/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return5__0 output mcu_i/hash_0/inst/murmur_return5__0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return5__1 output mcu_i/hash_0/inst/murmur_return5__1/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return0 multiplier stage mcu_i/hash_0/inst/murmur_return0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return0__0 multiplier stage mcu_i/hash_0/inst/murmur_return0__0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return0__1 multiplier stage mcu_i/hash_0/inst/murmur_return0__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3 multiplier stage mcu_i/hash_0/inst/murmur_return3/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__0 multiplier stage mcu_i/hash_0/inst/murmur_return3__0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__1 multiplier stage mcu_i/hash_0/inst/murmur_return3__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__2 multiplier stage mcu_i/hash_0/inst/murmur_return3__2/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__3 multiplier stage mcu_i/hash_0/inst/murmur_return3__3/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return3__4 multiplier stage mcu_i/hash_0/inst/murmur_return3__4/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return5 multiplier stage mcu_i/hash_0/inst/murmur_return5/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return5__0 multiplier stage mcu_i/hash_0/inst/murmur_return5__0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP mcu_i/hash_0/inst/murmur_return5__1 multiplier stage mcu_i/hash_0/inst/murmur_return5__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[0]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[0]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[10]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[10]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[10]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[11]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[11]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[11]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[12]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[12]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[12]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[13]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[13]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[13]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[14]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[14]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[14]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[15]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[15]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[15]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[16]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[16]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[16]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[17]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[17]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[17]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[18]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[18]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[18]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[19]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[19]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[19]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[1]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[1]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[20]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[20]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[20]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[21]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[21]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[21]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[22]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[22]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[22]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[23]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[23]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[23]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[24]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[24]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[24]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[25]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[25]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[25]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[26]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[26]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[26]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[27]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[27]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[27]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[28]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[28]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[28]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[29]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[29]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[29]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[2]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[2]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[2]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[30]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[30]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[30]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[31]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[31]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[31]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[3]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[3]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[3]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[4]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[4]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[4]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[5]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[5]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[5]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[6]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[6]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[6]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[7]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[7]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[7]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[8]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[8]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[8]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+WARNING: [DRC PDRC-153] Gated clock check: Net mcu_i/hash_0/inst/h_reg[9]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin mcu_i/hash_0/inst/h_reg[9]_LDC_i_1/O, cell mcu_i/hash_0/inst/h_reg[9]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+INFO: [Vivado 12-3199] DRC finished with 0 Errors, 67 Warnings
+INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
+INFO: [Project 1-821] Please set project.enableDesignId to be 'true'.
+INFO: [Designutils 20-2272] Running write_bitstream with 2 threads.
+Loading data files...
+Loading site data...
+Loading route data...
+Processing options...
+Creating bitmap...
+Creating bitstream...
+Writing bitstream ./mcu_wrapper.bit...
+INFO: [Vivado 12-1842] Bitgen Completed Successfully.
+INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
+INFO: [Common 17-83] Releasing license: Implementation
+117 Infos, 143 Warnings, 76 Critical Warnings and 0 Errors encountered.
+write_bitstream completed successfully
+write_bitstream: Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 1937.391 ; gain = 412.656
+INFO: [Common 17-206] Exiting Vivado at Wed Jun 17 13:08:52 2020...
