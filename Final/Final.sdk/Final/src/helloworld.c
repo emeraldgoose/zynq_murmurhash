@@ -73,9 +73,9 @@ XScuGic INTCInst;
 static int push_sw_data;
 static int mode;			// 0: select file, 1: readfile, find hash, 2: save hash
 static int button;			// 1, 2, 3, 4
-u32 hash_data;			// 32bit Hash
+u32 hash_data;				// 32bit Hash
 int fileIdx;				// File Index
-int addressIdx;			// Memory Address 간격
+int addressIdx;				// Memory Address 간격
 
 // file variation
 FIL fil;				// File object structure (FIL)
@@ -246,9 +246,9 @@ int main() {
 				xil_printf("Not original file\n\r");
 
 				display_string("Not original FIL");
-				sleep(2); 								// 1sec hold
+				sleep(2); 				// 1sec hold
 
-				mode=2;									// 다음 모드로 변경
+				mode=2;					// 다음 모드로 변경
 			}
 			xil_printf("\n");
 		}
