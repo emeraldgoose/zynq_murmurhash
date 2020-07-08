@@ -8,7 +8,9 @@
   - 현재 murmurhash2 알고리즘은 결함발견으로 사용해서는 안됩니다.
   - site : https://sites.google.com/site/murmurhash/
 ## HASH.srcs
-- Verilog로 코딩되었으며 hash 생성을 담당하는 블록
+- Language : Verilog
+- hash 생성을 담당하는 블록
 - Final.xpr을 불러온 후 user ip 등록을 해야 사용가능합니다.
 ## Final
+- Language : C
 - HASH.srcs를 user ip로 등록했다면 export bitstream 후 SDK를 열어 실행하시면 됩니다.
