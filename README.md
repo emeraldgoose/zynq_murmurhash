@@ -5,7 +5,7 @@
 ## Hash algorithm
 - murmurhash2 algorithm
   - non-cryptographic hash function
-  - 현재 murmurhash2 알고리즘은 결함발견으로 사용해서는 안됩니다.
+  - murmurhash2 알고리즘은 결함발견으로 사용해서는 안됩니다.
   - site : https://sites.google.com/site/murmurhash/
 ## HASH.srcs
 - Language : Verilog
