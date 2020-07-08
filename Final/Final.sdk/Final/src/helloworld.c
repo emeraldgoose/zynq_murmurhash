@@ -471,7 +471,7 @@ void fileRead(int idx, char* path) { 								// read file
 
 u32 string2hex(char* msg) { 									// 4Bytes String to hex
 	u32 res=0;
-	res += ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]);				// msg 원소를 시프트시켜 32bit로 생성
+	res = ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]);				// msg 원소를 시프트시켜 32bit로 생성
 	return res;
 }
 
