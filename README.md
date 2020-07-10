@@ -1,4 +1,5 @@
 # 2020-1 시스템반도체 프로젝트
+- Micro SD안 이진파일들의 해쉬를 계산하고 저장, 파일 수정 여부를 판단 
 ## Device
 - HUINS RPS-7020TK
 - XilinX XC7Z020 (Xilinx Zynq 7020)
