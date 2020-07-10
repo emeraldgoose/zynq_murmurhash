@@ -3,6 +3,8 @@
 ## Device
 - HUINS RPS-7020TK
 - XilinX XC7Z020 (Xilinx Zynq 7020)
+## Tool
+- Xilinx Vivado Design Suite
 ## Hash algorithm
 - murmurhash2 algorithm
   - non-cryptographic hash function
