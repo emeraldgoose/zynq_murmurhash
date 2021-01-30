@@ -44,7 +44,7 @@
  *   uartlite    Configurable only in HW design
  *   ps7_uart    115200 (configured by bootrom/bsp)
  *
- * 정보통신공학과 14010843 김민성
+ * 
  *
  */
 
