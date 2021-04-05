@@ -71,19 +71,19 @@ XScuGic INTCInst;
 
 // Global variation
 static int push_sw_data;
-static int mode;			// 0: select file, 1: readfile, find hash, 2: save hash
-static int button;			// 1, 2, 3, 4
-u32 hash_data;				// 32bit Hash
-int fileIdx;				// File Index
-int addressIdx;				// Memory Address 간격
+static int mode; // 0: select file, 1: readfile, find hash, 2: save hash
+static int button; // 1, 2, 3, 4
+u32 hash_data; // 32bit Hash
+int fileIdx; // File Index
+int addressIdx; // Memory Address 간격
 
 // file variation
-FIL fil;				// File object structure (FIL)
-FILINFO fno[257];		// File status structure (FILINFO)
-FRESULT res;			// File function return code (FRESULT)
-DIR dir;				// Directory object structure (DIR)
-FATFS fs32;				// File system object structure (FATFS)
-char dataBuffer[4];		// 4Byte Buffer
+FIL fil; // File object structure (FIL)
+FILINFO fno[257]; // File status structure (FILINFO)
+FRESULT res; // File function return code (FRESULT)
+DIR dir; // Directory object structure (DIR)
+FATFS fs32; // File system object structure (FATFS)
+char dataBuffer[4]; // 4Byte Buffer
 
 //function list
 void BTN_Intr_Handler(void *InstancePtr);
@@ -107,9 +107,9 @@ int main() {
 	xil_printf("Hello\n\r");// hello?
 
 	int status;
-	u32 IV = INITIAL_VALUE;	// 해쉬 초기 Seed 값
-	TCHAR *Path="0:/";		// SD 최상단 폴더
-	char* fileName;			// 파일 이름
+	u32 IV = INITIAL_VALUE; // 해쉬 초기 Seed 값
+	TCHAR *Path="0:/"; // SD 최상단 폴더
+	char* fileName; // 파일 이름
 
 	// Initialize LCD
 	status =XGpio_Initialize(&LCD_Inst, XPAR_LCD_DEVICE_ID);
@@ -146,16 +146,16 @@ int main() {
 	}
 
 	/* Set gpio direction */
-	XGpio_SetDataDirection(&LCD_Inst, 1, 0x00); 	// Set LCD direction to outputs
+	XGpio_SetDataDirection(&LCD_Inst, 1, 0x00);  // Set LCD direction to outputs
 
-	XGpio_SetDataDirection(&PUSH_SWInst, 1, 0xFF); 	// Set all buttons direction to inputs
+	XGpio_SetDataDirection(&PUSH_SWInst, 1, 0xFF); // Set all buttons direction to inputs
 
-	XGpio_SetDataDirection(&Hash_data,1,0x00); 		// data_in
-	XGpio_SetDataDirection(&Hash_data,2,0xff); 		// data_out
-	XGpio_SetDataDirection(&Hash_ctrl,1,0x00); 		// reset
-	XGpio_SetDataDirection(&Hash_ctrl,2,0x00); 		// Seed
+	XGpio_SetDataDirection(&Hash_data,1,0x00); // data_in
+	XGpio_SetDataDirection(&Hash_data,2,0xff); // data_out
+	XGpio_SetDataDirection(&Hash_ctrl,1,0x00); // reset
+	XGpio_SetDataDirection(&Hash_ctrl,2,0x00); // Seed
 
-	XGpio_SetDataDirection(&LEDInst,1,0xff);		// Set LED direction
+	XGpio_SetDataDirection(&LEDInst,1,0xff); // Set LED direction
 
 	// Initialize interrupt controller
 	status = IntcInitFunction(XPAR_PS7_SCUGIC_0_DEVICE_ID, &PUSH_SWInst);
@@ -164,113 +164,113 @@ int main() {
 		return XST_FAILURE;
 	}
 
-	char* buf=""; 						// 첫번째 해쉬 출력은 버려야 함
+	char* buf=""; // 첫번째 해쉬 출력은 버려야 함
 	hash_write(buf,IV);
 
 	/////////////////////////////////////////////////////////////////////
 
-	fileIdx=0;							// fileIndex initialize
+	fileIdx=0; // fileIndex initialize
 	init_LCD();
 
 	xil_printf("Hashing Program\n\r");
 	display_string("Hashing Program");
 
-	for(int i=1;i<=8;i++) {							// 2sec hold, Loading
-		XGpio_DiscreteWrite(&LEDInst,1,(1<<i));		// LED 1번부터 8번까지 250ms 간격으로 순차 점등
+	for(int i=1;i<=8;i++) { // 2sec hold, Loading
+		XGpio_DiscreteWrite(&LEDInst,1,(1<<i)); // LED 1번부터 8번까지 250ms 간격으로 순차 점등
 		usleep(250000);
 	}
-	XGpio_DiscreteWrite(&LEDInst,1,0);				// LED 소등
+	XGpio_DiscreteWrite(&LEDInst,1,0); // LED 소등
 
-	addressIdx=-32;									// addr initialize, 처음 저장하는 장소를 BASEADDR로 하기 위함
-	int idx=1; 										// file idx, 0: Root "0:/"
-	int is_mount=0, pMount=0;						// 현재 마운트 정보, 이전 마운트 정보
-	mode=0;											// state
+	addressIdx=-32; // addr initialize, 처음 저장하는 장소를 BASEADDR로 하기 위함
+	int idx=1; // file idx, 0: Root "0:/"
+	int is_mount=0, pMount=0; // 현재 마운트 정보, 이전 마운트 정보
+	mode=0; // state
 
 	while(1) {
-		res=f_mount(&fs32,Path,1);					// SD 마운트 시도
+		res=f_mount(&fs32,Path,1); // SD 마운트 시도
 
-		if(res!=FR_OK) {							// Unmounted
-			XGpio_DiscreteWrite(&LEDInst,1,0x80);	// 8번 LED 점등
+		if(res!=FR_OK) { // Unmounted
+			XGpio_DiscreteWrite(&LEDInst,1,0x80); // 8번 LED 점등
 			xil_printf("Unmounted\n\r");
 			display_string("Unmounted");
 			is_mount=0;
 			mode=0;
 			continue;
 		}
-		else {											// Mounted
+		else { // Mounted
 			is_mount=1;
-			fileIdx=0;									// fileIdx 초기화 (파일 목록이 바뀔 수 있기 때문)
-			f_opendir_scan(Path);						// SD 폴더 스캔
-			XGpio_DiscreteWrite(&LEDInst,1,0x40);		// 7번 LED 점등
+			fileIdx=0; // fileIdx 초기화 (파일 목록이 바뀔 수 있기 때문)
+			f_opendir_scan(Path); // SD 폴더 스캔
+			XGpio_DiscreteWrite(&LEDInst,1,0x40); // 7번 LED 점등
 		}
 
-		if(is_mount!=pMount) {							// 이전 마운트 정보와 현재 마운트 정보가 다르면 SD 입력이 달라졌음을 의미
-			if(is_mount==1 && pMount==0) updateHash();	// 파일 목록이 변경되었다면 파일 인덱스 정보도 변경되므로 메모리 정보를 변경
-			pMount=is_mount;							// 이전 마운트 정보 업데이트
+		if(is_mount!=pMount) { // 이전 마운트 정보와 현재 마운트 정보가 다르면 SD 입력이 달라졌음을 의미
+			if(is_mount==1 && pMount==0) updateHash(); // 파일 목록이 변경되었다면 파일 인덱스 정보도 변경되므로 메모리 정보를 변경
+			pMount=is_mount; // 이전 마운트 정보 업데이트
 		}
 
 		if(is_mount && mode==0) {
-			XGpio_DiscreteWrite(&LEDInst,1,0x41);		// LED 1번, 7번 점등
-			if(button==1) { 							// up index
+			XGpio_DiscreteWrite(&LEDInst,1,0x41); // LED 1번, 7번 점등
+			if(button==1) { // up index
 				idx++;
 				if(idx>fileIdx) idx=1;
-				button=0;								// 버튼 입력이 유지되지 않도록 초기화
+				button=0; // 버튼 입력이 유지되지 않도록 초기화
 			}
-			else if(button==2) { 						// down index
+			else if(button==2) { // down index
 				idx--;
 				if(idx<1) idx=fileIdx;
-				button=0;								// 버튼 입력이 유지되지 않도록 초기화
+				button=0; // 버튼 입력이 유지되지 않도록 초기화
 			}
 			else if(button==3) mode=1, button=0;
 
-			fileName=fno[idx].fname;					// FILINFO 구조체의 fname을 저장
-			display_string(fileName);					// LCD로 출력
-			xil_printf("\r                        \r");	// 시리얼 버퍼제거
-			xil_printf("\rFileName : %s\r",fileName);	// 시리얼로 출력
+			fileName=fno[idx].fname; // FILINFO 구조체의 fname을 저장
+			display_string(fileName); // LCD로 출력
+			xil_printf("\r                        \r"); // 시리얼 버퍼제거
+			xil_printf("\rFileName : %s\r",fileName); // 시리얼로 출력
 		}
 
 		else if(is_mount && mode==1) {
-			XGpio_DiscreteWrite(&LEDInst,1,0x42);		// LED 2번, 7번 점등
+			XGpio_DiscreteWrite(&LEDInst,1,0x42); // LED 2번, 7번 점등
 			xil_printf("\n");
-			fileRead(idx, Path); 						// Select this file and calculate hash
+			fileRead(idx, Path); // Select this file and calculate hash
 
-			if(find_hash(idx)) { 						// same hash in memory, this file is original
+			if(find_hash(idx)) { // same hash in memory, this file is original
 				xil_printf("Original file\n\n\r");
 
 				display_string("Origianl FIL");
-				sleep(2); 								// 2sec hold
+				sleep(2); // 2sec hold
 
 				mode=0;
 			}
-			else { 										// 메모리에 없거나 원본이 아님
+			else { // 메모리에 없거나 원본이 아님
 				xil_printf("Not original file\n\r");
 
 				display_string("Not original FIL");
-				sleep(2); 								// 1sec hold
+				sleep(2); // 1sec hold
 
-				mode=2;									// 다음 모드로 변경
+				mode=2; // 다음 모드로 변경
 			}
 			xil_printf("\n");
 		}
 
 		else if(is_mount && mode==2) {
-			XGpio_DiscreteWrite(&LEDInst,1,0x44);		// LED 3번, 7번 점등
+			XGpio_DiscreteWrite(&LEDInst,1,0x44); // LED 3번, 7번 점등
 
 			xil_printf("Save the file?\r");
 			display_string("Save the file?");
 
-			if(button==1) {								// fileIdx 값에 따라 저장되는 위치가 달라짐
-				addressIdx=32*(idx-1);					// BASEADDR에 addressIdx 값을 더해 저장하기 때문에 32bit씩 건너띄어 저장
+			if(button==1) { // fileIdx 값에 따라 저장되는 위치가 달라짐
+				addressIdx=32*(idx-1); // BASEADDR에 addressIdx 값을 더해 저장하기 때문에 32bit씩 건너띄어 저장
 				xil_printf("\nYes\n\r");
 				Xil_Out32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+addressIdx,hash_data);
 				xil_printf("addr=%d, Hash saved\n\n\r",addressIdx);
-				button=0;								// 버튼 입력이 유지되지 않도록 초기화
-				mode=0;									// 저장 완료 후 모드 변경 (->0)
+				button=0; // 버튼 입력이 유지되지 않도록 초기화
+				mode=0; // 저장 완료 후 모드 변경 (->0)
 			}
 			else if(button==2){
 				xil_printf("\nNo\n\n\r");
-				button=0;								// 버튼 입력이 유지되지 않도록 초기화
-				mode=0;									// 저장 완료 후 모드 변경 (->0)
+				button=0; // 버튼 입력이 유지되지 않도록 초기화
+				mode=0; // 저장 완료 후 모드 변경 (->0)
 			}
 		}
 	}
@@ -396,66 +396,66 @@ void clear_LCD() {
 	usleep(4000);
 }
 
-void f_opendir_scan(char *Path) {								// open directory & scan
+void f_opendir_scan(char *Path) { // open directory & scan
     TCHAR path[200] = "";
-    res = f_mount(&fs32,Path,1);								// Mount a logical drive
+    res = f_mount(&fs32,Path,1); // Mount a logical drive
     //printf("SD Mount : res f_mount : %02X\n\r",res);
 
     if (res == FR_OK)
     {
-    	res = f_opendir(&dir,path);								// Open a directory
+    	res = f_opendir(&dir,path); // Open a directory
         //printf("res f_open : %02X\n\r",res);
         if (res == FR_OK)
         {
         	while(1)
         	{
-			res = f_readdir(&dir, &fno[fileIdx]);				// Read a directory item
+			res = f_readdir(&dir, &fno[fileIdx]); // Read a directory item
 
 			if(res!=FR_OK) display_string("Empty folder");
 
-			if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break;		// readdir 리턴값이 FR_OK가 아니거나 파일 이름이 없으면 종료
+			if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break; // readdir 리턴값이 FR_OK가 아니거나 파일 이름이 없으면 종료
 			else fileIdx++;
 
 		}
 
 	}
-        res=f_closedir(&dir);									// Close an open directory
+        res=f_closedir(&dir); // Close an open directory
     }
     else return;
 
-    res = f_mount(0,Path,0); 									// Unmount
-    fileIdx-=1;													// 마지막 루프에서 하나 더 카운트 되므로 하나 빼준다
+    res = f_mount(0,Path,0); // Unmount
+    fileIdx-=1; // 마지막 루프에서 하나 더 카운트 되므로 하나 빼준다
 }
 
-void fileRead(int idx, char* path) { 				// read file
-	UINT br;										// Pointer to the UINT variable that receives number of bytes read
-	char *fn;										// file name
+void fileRead(int idx, char* path) { // read file
+	UINT br; // Pointer to the UINT variable that receives number of bytes read
+	char *fn; // file name
 
-	res = f_mount(&fs32,path,1);					// Mount a logical drive
+	res = f_mount(&fs32,path,1); // Mount a logical drive
 	if(res!=FR_OK) {
 		xil_printf("failed mount\n\r");
 		return;
 	}
 
 	fn=fno[idx].fname;
-	if(fn==0) return;								// 파일 이름이 없으면 종료
+	if(fn==0) return; // 파일 이름이 없으면 종료
 
-	res=f_open(&fil,fn,FA_READ);					// Open a file
+	res=f_open(&fil,fn,FA_READ); // Open a file
 
 	if(res==FR_OK) {
 		int cnt=0;
 		DWORD fsk_offset=0;
 
 		for(int i=0;i<fil.fsize;i+=4) {
-			memset(dataBuffer,0,sizeof(dataBuffer));				// initialize buffer
+			memset(dataBuffer,0,sizeof(dataBuffer)); // initialize buffer
 
-			res=f_lseek(&fil,fsk_offset);							// Move file pointer of a file object
-			res=f_read(&fil,(void*)dataBuffer,4,&br);				// Read data from a file
+			res=f_lseek(&fil,fsk_offset); // Move file pointer of a file object
+			res=f_read(&fil,(void*)dataBuffer,4,&br); // Read data from a file
 
-			if(cnt==0) hash_write(dataBuffer,(u32)INITIAL_VALUE);	// 처음 해쉬는 시드로 초기값 넣고 계산
-			else hash_write(dataBuffer,hash_data);					// 두번째 이상 해쉬는 시드로 이전 해쉬를 넣고 계산
+			if(cnt==0) hash_write(dataBuffer,(u32)INITIAL_VALUE); // 처음 해쉬는 시드로 초기값 넣고 계산
+			else hash_write(dataBuffer,hash_data); // 두번째 이상 해쉬는 시드로 이전 해쉬를 넣고 계산
 
-			fsk_offset+=4;											// 오프셋 4바이트 뒤로 이동
+			fsk_offset+=4; // 오프셋 4바이트 뒤로 이동
 			cnt++;
 		}
 	}
@@ -465,42 +465,42 @@ void fileRead(int idx, char* path) { 				// read file
 		return;
 	}
 
-	res=f_close(&fil); 											// file close
-	res = f_mount(&fs32,path,0); 								// Unmount a logical drive
+	res=f_close(&fil); // file close
+	res = f_mount(&fs32,path,0); // Unmount a logical drive
 }
 
-u32 string2hex(char* msg) { 									// 4Bytes String to hex
+u32 string2hex(char* msg) { // 4Bytes String to hex
 	u32 res=0;
-	res = ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]);	// msg 원소를 시프트시켜 32bit로 생성
+	res = ((msg[0]<<24) + (msg[1]<<16) + (msg[2]<<8) + msg[3]); // msg 원소를 시프트시켜 32bit로 생성
 	return res;
 }
 
-void hash_write(char* buf, u32 Seed) {								// hash를 계산
-	XGpio_DiscreteWrite(&Hash_ctrl,2,Seed); 						// Seed 입력
-	XGpio_DiscreteWrite(&Hash_ctrl,1,0); 							// nRST = 1 입력
+void hash_write(char* buf, u32 Seed) { // hash를 계산
+	XGpio_DiscreteWrite(&Hash_ctrl,2,Seed); // Seed 입력
+	XGpio_DiscreteWrite(&Hash_ctrl,1,0); // nRST = 1 입력
 
-	XGpio_DiscreteWrite(&Hash_ctrl,1,1); 							// nRST = 0 입력
-	XGpio_DiscreteWrite(&Hash_data,1,string2hex(buf));				// 문자를 hex로 변환하고 hasher로 입력
-	usleep(1);														// 1us 대기
+	XGpio_DiscreteWrite(&Hash_ctrl,1,1); // nRST = 0 입력
+	XGpio_DiscreteWrite(&Hash_data,1,string2hex(buf)); // 문자를 hex로 변환하고 hasher로 입력
+	usleep(1); // 1us 대기
 
-	hash_data=XGpio_DiscreteRead(&Hash_data,2);						// 계산된 해쉬 저장
+	hash_data=XGpio_DiscreteRead(&Hash_data,2); // 계산된 해쉬 저장
 }
 
-void display_string(char* msg) {									// Text LCD로 문자열 출력할 수 있는 함수
+void display_string(char* msg) { // Text LCD로 문자열 출력할 수 있는 함수
 	clear_LCD();
 	for(int i=0;i<strlen(msg);i++) display_LCD(msg[i]);
 }
 
-int find_hash(int idx) {											// 지정된 위치에 메모리에 저장된 해쉬를 가져와 계산된 해쉬와 일치하는지 리턴하는 함수
+int find_hash(int idx) { // 지정된 위치에 메모리에 저장된 해쉬를 가져와 계산된 해쉬와 일치하는지 리턴하는 함수
 	u32 readMemoryData=Xil_In32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(idx-1));
 	if(hash_data==readMemoryData) return 1;
 	return 0;
 }
 
-void updateHash() {										// 파일 목록 변경 시 메모리 위치 변경해주는 함수
-	int isHash[101];									// 기존 파일 해쉬가 있는지 확인
+void updateHash() { // 파일 목록 변경 시 메모리 위치 변경해주는 함수
+	int isHash[101]; // 기존 파일 해쉬가 있는지 확인
 	memset(isHash,0,sizeof(isHash));
-	for(int i=1;i<=fileIdx;i++) {						// 파일을 열어 해쉬를 계산하고 메모리에 있는지 순차 탐색
+	for(int i=1;i<=fileIdx;i++) { // 파일을 열어 해쉬를 계산하고 메모리에 있는지 순차 탐색
 		fileRead(i,"0:/");
 		for(int j=1;j<=255;j++) {
 			u32 readMemoryData=Xil_In32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(j-1));
@@ -510,7 +510,7 @@ void updateHash() {										// 파일 목록 변경 시 메모리 위치 변경
 			}
 		}
 	}
-	for(int i=1;i<=fileIdx;i++) {						// 메모리 위치 변경
+	for(int i=1;i<=fileIdx;i++) { // 메모리 위치 변경
 		if(isHash[i]) {
 			fileRead(i,"0:/");
 			Xil_Out32(XPAR_AXI_BRAM_CTRL_0_S_AXI_BASEADDR+32*(i-1),hash_data);
