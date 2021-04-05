@@ -104,10 +104,10 @@ void updateHash();
 #define BTN_INT XGPIO_IR_CH1_MASK
 
 int main() {
-	xil_printf("Hello\n\r");	// hello?
+	xil_printf("Hello\n\r");// hello?
 
 	int status;
-	u32 IV = INITIAL_VALUE;		// 해쉬 초기 Seed 값
+	u32 IV = INITIAL_VALUE;	// 해쉬 초기 Seed 값
 	TCHAR *Path="0:/";		// SD 최상단 폴더
 	char* fileName;			// 파일 이름
 
