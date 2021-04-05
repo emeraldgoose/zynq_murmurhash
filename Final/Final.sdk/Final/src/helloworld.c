@@ -399,26 +399,26 @@ void clear_LCD() {
 void f_opendir_scan(char *Path) {								// open directory & scan
     TCHAR path[200] = "";
     res = f_mount(&fs32,Path,1);								// Mount a logical drive
-//  printf("SD Mount : res f_mount : %02X\n\r",res);
+    //printf("SD Mount : res f_mount : %02X\n\r",res);
 
     if (res == FR_OK)
     {
     	res = f_opendir(&dir,path);								// Open a directory
-//      printf("res f_open : %02X\n\r",res);
+        //printf("res f_open : %02X\n\r",res);
         if (res == FR_OK)
         {
         	while(1)
         	{
-				res = f_readdir(&dir, &fno[fileIdx]);				// Read a directory item
+			res = f_readdir(&dir, &fno[fileIdx]);					// Read a directory item
 
-				if(res!=FR_OK) display_string("Empty folder");
+			if(res!=FR_OK) display_string("Empty folder");
 
-				if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break;	// readdir 리턴값이 FR_OK가 아니거나 파일 이름이 없으면 종료
-				else fileIdx++;
-
-			}
+			if ((res != FR_OK) || (fno[fileIdx].fname[0] == 0)) break;		// readdir 리턴값이 FR_OK가 아니거나 파일 이름이 없으면 종료
+			else fileIdx++;
 
 		}
+
+	}
         res=f_closedir(&dir);									// Close an open directory
     }
     else return;
