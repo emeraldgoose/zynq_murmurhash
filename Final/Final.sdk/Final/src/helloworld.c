@@ -347,7 +347,7 @@ int IntcInitFunction(u16 DeviceId, XGpio *GpioInstancePtr) {
 
 //text-LCD initialize
 void init_LCD() {
-    XGpio_DiscreteWrite(&LCD_Inst, 1, 56);
+	XGpio_DiscreteWrite(&LCD_Inst, 1, 56);
 	usleep(6000);
 	XGpio_DiscreteWrite(&LCD_Inst, 1, 312);
 	usleep(6000);
