@@ -13,6 +13,8 @@
 - Language : Verilog
 - hash 생성을 담당하는 블록
 - Final.xpr을 불러온 후 user ip 등록을 해야 사용가능합니다.
+- [HASH IP](./HASH.srcs/sources_1/new/hash.v)
 ## Final
 - Language : C
 - HASH.srcs를 user ip로 등록했다면 export bitstream 후 SDK를 열어 실행하시면 됩니다.
+- [Firmware](./Final/Final.sdk/Final/src/helloworld.c)
