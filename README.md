@@ -5,6 +5,8 @@
 - XilinX XC7Z020 (Xilinx Zynq 7020)
 ## Tool
 - Xilinx Vivado Design Suite
+## Block Diagram
+![스크린샷 2021-04-05 오후 5 07 22](https://user-images.githubusercontent.com/50171632/113552692-74ad2400-9631-11eb-8316-24188f3f39ab.png)
 ## Hash algorithm
 - murmurhash2 algorithm
   - non-cryptographic hash function
